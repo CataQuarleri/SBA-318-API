@@ -9,7 +9,7 @@ const usersRoutes = require('./src/routes/usersRoutes.js');
 const petsRoutes = require('./src/routes/petsRoutes.js');
 // const addressRoutes = require('./src/routes/addressRoutes.js')
 const error = require('./src/middlewares/errorHandling.js');
-
+const {createNewUser} = require('./src/utilities/createNewUser.js')
 app.set('view engine', 'ejs');
 
 app.use(express.json());
@@ -22,6 +22,7 @@ app.use('/pets', petsRoutes);
 // app.use('/api/address', addressRoutes)
 
 app.get('/', (req, res) => {
+	createNewUser()
 	res.render('pages/home.ejs');
 });
 

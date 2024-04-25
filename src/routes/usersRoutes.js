@@ -35,6 +35,7 @@ router
 		console.log('SOMETHING', body);
 		if (firstName && lastName && phone && email && contactPreferences) {
 			let data = {
+				_id: 20,
 				firstName: firstName,
 				lastName: lastName,
 				phone: phone,
@@ -78,9 +79,11 @@ router
 		let country = req.body.country;
 		let typeOfAddress = req.body.type;
 		if(service && startingDate && endDate && street && city && state && zip && country && typeOfAddress) {
-			let address = {street, city, state, zip, country, typeOfAddress}
+			let address = {id: 1, typeOfAddress, street, city, state, zip, country}
 			let addInfo = {service, nextDates: {startingDate, endDate}, address}
 			console.log("ADD INFO", addInfo)
+			store.set('addInfo', {addInfo: addInfo})
+			store.set('address', {address: address})
 			res.redirect('/pets');
 		}else {
 			res.json({error: "Not enough information"})
