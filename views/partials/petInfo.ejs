@@ -1,41 +1,60 @@
 
-<form id="userForm" action="/users/api/postdata" method="post">
-    <h2>Tell us about your needs</h2>
+<form id="petForm" action="/users/api/postdata" method="post">
+    <h2>Tell us about your pet's needs</h2>
     <div class="form-group">
-      <label for='service'>What type of  do you need?</label>
-      <select>
-        <option value="Check In">Check In</option>
-        <option value="Day Care">Day Care</option>
-        <option value="Overnight Care">Overnight Care</option>
-        <option value="Planning a trip">Planning a trip</option>
-        <option value="Dog Walks">Dog Walks</option>
-    </select>
+      <div class="form-group">
+        <label id="name" for="name">Pet Name</label>
+        <input class="input" type="text" id="name" required>
+  </div>
+      <label for='typeOfPet'>What type of pet needs our service?</label>
+      <select id="typeOfPet" name="typeOfPet" required>
+        <option>--Select One--</option>
+        <option value="Dog">Dog</option>
+        <option value="Cat">Cat</option>
+        <option value="Bird">Bird</option>
+        <option value="Chicken">Chicken</option>
+        <option value="Farm Animal">Farm Animal</option>
+        <option value="Serpent/Reptile">Serpent/Reptile</option>
+        <option value="Frogs/Amphibian">Frogs/Amphibian</option>
+        <option value="Roden">Roden</option>
+        <option value="Other">Other</option>
+      </select>
     </div>
     <div class="form-group">
-      <label for='startingDate'>When do you need our service</label>
-      <input class="input" type="date" id="startingDate" name="startingDate" required>
-      <label for='endDate'>Until when?</label>
-      <input class="input" type="date" id="endDate" name="endDate">
+      <label for='breed'>Do you know your pet's breed?</label>
+      <input class="input" type="text" id="breed" name="breed">
+    </div>
+    <div class="form-group">
+      <label for="sex">Do you know your pet's sex?</label>
+      <select id="sex" name="sex">
+        <option value="I don't know">I don't know</option>
+          <option value="F">Female</option>
+          <option value="M">Male</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for='age'>How old is your pet?</label>
+      <input class="input" type="text" id="age" name="age" required>
+    </div>
+    <div class="form-group">
+      <label for='size'>Tell us the size of your pet</label>
+      <input class="input" placeholder="i.e: small, fat cat, 30 pounds, half a cow, frog size" type="text" id="size" name="size">
+    </div>
+    <div class="form-group">
+      <label for='picture'>Would you mind sharing the silliest picture of your pet with us?</label>
+      <input  type="file" id="picture" name="picture">
     </div>
     <div class="checkbox-group">
-            <input type="checkbox" id="noEndDate">
-            <label id="noEndDate" for="noEndDate">I don't know yet</label>
-      </div>
-    <div class="form-group">
-      <label for="address">Where do you need the service?</label>
-      <input class="input" type="text" placeholder="Street" id="street" name="street" required>
-      <input class="input" type="text" placeholder="City" id="city" name="city" required>
-      <input class="input" type="text" placeholder="State" id="state" name="state" required>
-      <input class="input" type="text" placeholder="ZipCode" id="zip" name="zip" required>
-      <input class="input" type="text" placeholder="Country" id="country" name="country" required>
-    </div>
-    <div class="form-group">
-        <label for="type">Whose Address is this?</label>
-        <select>
-            <option value="Parents House">My House</option>
-            <option value="DayCare">Day Care</option>
-            <option value="Friend or relative">Friend or relative</option>
-        </select>
-      </div>
-    <button type="submit" for="userForm">Next</button>
+      <input type="checkbox" id="needsWalks">
+      <label id="needsWalks" for="needsWalks">I need you to take my pet on walks</label>
+</div>
+<div class="checkbox-group">
+  <input type="checkbox" id="needsMedication">
+  <label id="needsMedication" for="needsMedication">I need you to administer medication to my pet</label>
+</div>
+<div class="checkbox-group">
+  <input type="checkbox" id="needsFood">
+  <label id="needsFood" for="needsFood">I need you to feed my pet</label>
+</div>
+    <button type="submit" for="petForm">Submit</button>
   </form>
