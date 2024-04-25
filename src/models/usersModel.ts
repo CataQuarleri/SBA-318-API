@@ -1,9 +1,9 @@
-import {IAddress} from './addressModel'
-import {PetType} from './petsModel'
+const {IAddress} = require('./addressModel')
+const {PetType} = require('./petsModel')
 
-  interface IPetInUser {
+interface IPetInUser {
     id: number;
-    type: PetType;
+    type: typeof PetType;
     name: string;
   }
   
@@ -36,7 +36,7 @@ import {PetType} from './petsModel'
     email: string;
     contactPreference: contactPreferences;
     houseInstructions: string;
-    address: IAddress;
+    address: typeof IAddress;
     pets: IPetInUser[];
     vetInfo: IVetInfo;
     emergencyContact: IEmergencyContact;
@@ -47,7 +47,7 @@ import {PetType} from './petsModel'
     _notes: string;
   }
     //@ts-ignore
-  class UserClass implements IUser {
+  export class UserClass implements IUser {
     constructor(
       public _id: number = 1,
       public firstName: string,
@@ -56,7 +56,7 @@ import {PetType} from './petsModel'
       public email: string,
       public contactPreference: contactPreferences,
       public houseInstructions: string = 'N/A',
-      public address: IAddress =  {id: 1, type: 'Parents House',street: '123 Fake St',city: 'Denver',state: 'CO',zip: '80216',country: 'USA'},
+      public address: typeof IAddress =  {id: 1, type: 'Parents House',street: '123 Fake St',city: 'Denver',state: 'CO',zip: '80216',country: 'USA'},
       public pets: IPetInUser[],
       public vetInfo: IVetInfo = { vet: 'Fake Vet',address: 'Somewhere',website: 'http://example.com',phone: '987-654-3210'},
       public emergencyContact: IEmergencyContact = {name: 'Emergency Friend',relation: 'Friend',phone: '456-123-7890'
@@ -72,3 +72,7 @@ import {PetType} from './petsModel'
       protected _notes: string = 'N/A'
     ) {}
   }
+
+  export let exampleUser = new UserClass(2, "Susan", "Miller", "303-123-4567", "susan@greyhounds.com", "Phone Call", undefined, {id: 2, type: "Parents House", street: "1230 Newport St", city: "Denver", state: "CO", zip: "80216", country: "USA"}, [{id: 2, type: "Dog", name: "Singer"}, {id: 3, type: "Dog", name: "Hank"}], undefined, undefined, "Venmo", 110, undefined)
+
+  console.log("USER IN MODEL", exampleUser.firstName)

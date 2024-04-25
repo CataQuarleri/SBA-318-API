@@ -147,3 +147,5 @@ class PetClass implements IPet {
     public relevantInformation: string
   ) {}
 }
+
+// module.exports = {PetType}
