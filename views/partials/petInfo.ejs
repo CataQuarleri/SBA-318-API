@@ -1,0 +1,41 @@
+
+<form id="userForm" action="/users/api/postdata" method="post">
+    <h2>Tell us about your needs</h2>
+    <div class="form-group">
+      <label for='service'>What type of service do you need?</label>
+      <select>
+        <option value="Check In">Check In</option>
+        <option value="Day Care">Day Care</option>
+        <option value="Overnight Care">Overnight Care</option>
+        <option value="Planning a trip">Planning a trip</option>
+        <option value="Dog Walks">Dog Walks</option>
+    </select>
+    </div>
+    <div class="form-group">
+      <label for='startingDate'>When do you need our service</label>
+      <input class="input" type="date" id="startingDate" name="startingDate" required>
+      <label for='endDate'>Until when?</label>
+      <input class="input" type="date" id="endDate" name="endDate">
+    </div>
+    <div class="checkbox-group">
+            <input type="checkbox" id="noEndDate">
+            <label id="noEndDate" for="noEndDate">I don't know yet</label>
+      </div>
+    <div class="form-group">
+      <label for="address">Where do you need the service?</label>
+      <input class="input" type="text" placeholder="Street" id="street" name="street" required>
+      <input class="input" type="text" placeholder="City" id="city" name="city" required>
+      <input class="input" type="text" placeholder="State" id="state" name="state" required>
+      <input class="input" type="text" placeholder="ZipCode" id="zip" name="zip" required>
+      <input class="input" type="text" placeholder="Country" id="country" name="country" required>
+    </div>
+    <div class="form-group">
+        <label for="type">Whose Address is this?</label>
+        <select>
+            <option value="Parents House">My House</option>
+            <option value="DayCare">Day Care</option>
+            <option value="Friend or relative">Friend or relative</option>
+        </select>
+      </div>
+    <button type="submit" for="userForm">Next</button>
+  </form>

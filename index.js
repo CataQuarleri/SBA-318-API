@@ -11,10 +11,13 @@ const error = require('./src/middlewares/errorHandling.js')
 
 app.set('view engine', 'ejs');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use('/api/users', usersRoutes)
-app.use('/api/pets', petsRoutes)
+app.use('/users', usersRoutes)
+app.use('/pets', petsRoutes)
 // app.use('/api/address', addressRoutes)
 
 app.get('/', (req, res) => {
