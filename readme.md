@@ -71,7 +71,7 @@ This project is an assessment designed to measure understanding and practical im
 19. **Level of effort displayed in creativity, presentation, and user experience.**
     - [x] Effort was put into organizing code, implementing functionality, and providing clear instructions and feedback to users. A lot of creativity was displayed by coming up with an idea for a custom middleware considering the simplicity of the project
 
-###Bonus:
+### Bonus:
 20. **Practical Usage of Regular Expressions within Route Paths**
     - [x] Effectively utilized regular expressions to handle the pattern accepted for phone number, allowing the use of '+', '-', '()' and '.' as well as white space besides only numbers
 
