@@ -76,7 +76,7 @@ This project is an assessment designed to measure understanding and practical im
     - [x] Effectively utilized regular expressions to handle the pattern accepted for phone number, allowing the use of '+', '-', '()' and '.' as well as white space besides only numbers
 
 21. **Effective Use of at Least One Third-Party Node Package**
-    -[x] Used 2 Third Part Node Packages: Multer for file handling when submitting an image through a form; and Store2 to handle states and localStorage and for middleware usage
+    - [x] Used 2 Third Part Node Packages: Multer for file handling when submitting an image through a form; and Store2 to handle states and localStorage and for middleware usage
 
 ## Implementation Details
 
