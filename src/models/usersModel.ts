@@ -6,6 +6,7 @@ interface IPetInUser {
     type: typeof PetType;
     name: string;
   }
+  type noPetInfo = {noinfo: "no info"}
   
   interface IVetInfo {
     vet: string;
@@ -41,7 +42,7 @@ interface IPetInUser {
     nextDates: nextDates;
     // houseInstructions: string;
     address: typeof IAddress;
-    pets: IPetInUser[];
+    pets: IPetInUser[] | {noinfo: "no info"}
     // vetInfo: IVetInfo;
     // emergencyContact: IEmergencyContact;
     // paymentMethod: PaymentMethod;
@@ -63,7 +64,7 @@ interface IPetInUser {
       public nextDates: nextDates = {startingDate: new Date("01/01/199"), endDate: new Date("01/01/1999")},
       // public houseInstructions: string = 'N/A',
       public address: typeof IAddress =  {id: 1, typeofAddress: 'Parents House',street: '123 Fake St',city: 'Denver',state: 'CO',zip: '80216',country: 'USA'},
-      public pets: IPetInUser[],
+      public pets: IPetInUser[] | {noinfo: "no info"},
       // public vetInfo: IVetInfo = { vet: 'Fake Vet',address: 'Somewhere',website: 'http://example.com',phone: '987-654-3210'},
     //   public emergencyContact: IEmergencyContact = {name: 'Emergency Friend',relation: 'Friend',phone: '456-123-7890'
     // },
@@ -83,3 +84,5 @@ interface IPetInUser {
   // [{id: 2, type: "Dog", name: "Singer"}, {id: 3, type: "Dog", name: "Hank"}], undefined, undefined, "Venmo", 110, undefined)
 
   // console.log("USER IN MODEL", exampleUser.firstName)
+
+  module.exports = {UserClass}

@@ -1,5 +1,5 @@
 
-    <form id="userForm" action="/users/quote" method="post">
+    <form id="userForm" action="/users/api/contactInfo" method="post">
         <h2>Get a quote</h2>
         <div class="form-group">
           <label for="firstName">First Name</label>
@@ -26,5 +26,31 @@
               <option value="Phone Call">Phone Call</option>
           </select>
         </div>
-        <button type="submit" for="userForm">Next</button>
+        <%# async function handleSubmit(e){ 
+          e.preventDefault(); 
+        try{ 
+          let formData = document.getElementById('userForm') 
+          let response = await fetch('http://localhost:5050/users/api/contactInfo', {method: "POST", body: formData} ) 
+          if(response.ok) { 
+            const responseData = await response.json(); 
+            window.location.href = '/users/addinfo'; 
+          } else {
+        console.error('Error:', response.statusText); 
+        } 
+        } catch (error) { console.error('Error:', error); } } %>
+        <button onclick="handleSubmit(e)" for="userForm">Next</button>
       </form>
+      <!-- <script type="text/javascript"> 
+        async function handleSubmit(e){ 
+                 e.preventDefault(); 
+               try{ 
+                 let formData = document.getElementById('userForm') 
+                 let response = await fetch('http://localhost:5050/users/api/contactInfo', {method: "POST", body: formData} ) 
+                 if(response.ok) { 
+                   const responseData = await response.json(); 
+                   window.location.href = '/users/addinfo'; 
+                 } else {
+               console.error('Error:', response.statusText); 
+               } 
+               } catch (error) { console.error('Error:', error); } } 
+       </script> -->

@@ -1,14 +1,14 @@
 
-<form id="petForm" action="/users/api/postdata" method="post">
+<form id="petForm" action="/pets/api" method="post">
     <h2>Tell us about your pet's needs</h2>
     <div class="form-group">
       <div class="form-group">
         <label id="name" for="name">Pet Name</label>
-        <input class="input" type="text" id="name" required>
+        <input class="input" type="text" id="name" name="name" required>
   </div>
       <label for='typeOfPet'>What type of pet needs our service?</label>
       <select id="typeOfPet" name="typeOfPet" required>
-        <option>--Select One--</option>
+        <option selected disabled value="">--Select One--</option>
         <option value="Dog">Dog</option>
         <option value="Cat">Cat</option>
         <option value="Bird">Bird</option>
@@ -44,17 +44,20 @@
       <label for='picture'>Would you mind sharing the silliest picture of your pet with us?</label>
       <input  type="file" id="picture" name="picture">
     </div>
+    <h2>During out visits, mark all that apply:</h2>
     <div class="checkbox-group">
-      <input type="checkbox" id="needsWalks">
-      <label id="needsWalks" for="needsWalks">I need you to take my pet on walks</label>
+      
+      <label id="needsWalks" for="needsWalks">
+        <input type="checkbox" name="needsWalks" value="true">My pet needs to go on walks</label>
 </div>
 <div class="checkbox-group">
-  <input type="checkbox" id="needsMedication">
-  <label id="needsMedication" for="needsMedication">I need you to administer medication to my pet</label>
+  <label id="needsMedication" for="needsMedication">
+    <input type="checkbox" name="needsMedication" value="true">
+  My pet needs medication</label>
 </div>
 <div class="checkbox-group">
-  <input type="checkbox" id="needsFood">
-  <label id="needsFood" for="needsFood">I need you to feed my pet</label>
+  <label id="needsFood" for="needsFood">
+    <input type="checkbox" name="needsFood" value="true">My pet needs to be fed</label>
 </div>
     <button type="submit" for="petForm">Submit</button>
   </form>
