@@ -1,36 +1,41 @@
 const express = require('express');
 const router = express.Router();
 const store = require('store2');
+const error = require('../middlewares/errorHandling.js');
+
 
 const usersArray = require('../../data/users');
-const addressesArray = require('../../data/address');
+const petsArray = require('../../data/pets');
 
 //Regex
-let phonePattern = '^[0-9]+$'; //I need the phone as a string so I use pattern instead of type number in input
-let emailPattern = '^[^@]+@[^@]+.[^@]+$';
+let phonePattern = /^[0-9]+$/; //I need the phone as a string 
+let emailPattern = /^[^@]+@[^@]+.[^@]+$/;
 
-//Api routes
+//Api routes /users/api
 router
-	.route('/api')
+	.route('/')
 	.get((req, res, next) => {
+		//if userID in req.query
 		res.json(usersArray);
 	})
-	.post('/contactInfo', (req, res) => {
+	.post((req, res, next) => {
+		try{
 		let firstName = req.body.firstName;
 		let lastName = req.body.lastName;
 		let phone = req.body.phone;
-		if (phone.match(phonePattern)) {
-			next(error(400, "Bad request, phone has to be only numbers"))
-		}
+		// if (phone.match(phonePattern)) {
+		// 	next(error(400, "Bad request, phone has to be only numbers"))
+		// }
 		let email = req.body.email;
-		if (email.match(emailPattern)){
-			next(error(400, "Bad request, email has to be a valid format"))
-
-		}
+		// if (email.match(emailPattern)){
+		// 	next(error(400, "Bad request, email has to be a valid format"))
+		// }
 		let contactPreferences = req.body.contactPreferences;
-		let _id = (usersArray.length == 0 ? usersArray.length : usersArray.length - 1) + 1;
+		console.log("ALL DATA", firstName, lastName, phone, email, contactPreferences)
+		let _id = (usersArray.length == 0 | usersArray.length == 1 ? usersArray.length : usersArray.length - 1) + 1;
+		let data;
 		if (firstName && lastName && phone && email && contactPreferences) {
-			let data = {
+			 data = {
 				_id: _id,
 				firstName: firstName,
 				lastName: lastName,
@@ -40,34 +45,119 @@ router
 			};
 			store.set('contactInfo', data);
 			store.set('minUserInfo', {id: _id, name: `${firstName} ${lastName}`, phone: phone})
+			usersArray.push(data)
+			res.json({contactInfo: "saved", _id: _id, status: 201, user: data})
+		} else {
+			next(error(400, "Bad request"))
 		}
-		res.json({contactInfo: "saved", _id: _id, status: 201, user: data})
+	}catch (e){
+		console.log("ERROR in post", e)
+	}
 	})
-	
+
+	router
+		.route('/:id')
+		.get((req, res) => {
+			const user = usersArray.find((oneUser, i) => {
+				if (oneUser._id == req.params.id) {
+					return oneUser
+				}
+			});
+			if (user) {
+				return res.json(user);
+			} else {
+				next(error(404, "User not found"));
+			}
+		})
+		.patch((req, res) => {
+		const user = usersArray.find((oneUser, i) => {
+			if (oneUser._id == req.params.id) {
+				for (const key in req.body) {
+					usersArray[i][key] = req.body[key];
+				}
+				return true;
+			}
+		});
+		if (user) {
+			return res.json(user);
+		} else {
+			next(error(404, "User not found"));
+		}
+	})
+	.delete( (req, res) => {
+		const user = usersArray.find((oneUser, i) => {
+			if (oneUser._id == req.params.id) {
+				usersArray.splice(i, 1);
+				return true;
+			}
+		});
+		if (user) {
+			return res.json({delete: "success", user: user.id}).status(200);
+		} else {
+			next(error(404, "User not found"));
+		}
+		
+	});
+
+	router
+	.route('/:id/addPet/:petId')
+	.get( (req, res, next) => {	
+			const user = usersArray.find((oneUser) => {
+				if (oneUser._id == req.params.id) {
+					if (oneUser.pet){
+						oneUser.pet.find((onePet)=>{
+							if(onePet.id === req.params.petId){
+								res.json(onePet)
+							}else {
+						next(error(404, "Pet not found"))
+							}
+						})
+					} else {
+						next(error(404, "User does not have pets yet"))
+					}
+				}else {
+					next(error(404, "User not found"))
+				}
+			});
+		
+	})
+	.put( (req, res, next) => {
+		let petData;
+		const pet = petsArray.find((onepet) => {
+			if (onepet.id == req.params.petId) {
+				petData = onepet;
+				return true
+			}
+		});
+		if (pet){
+			const user = usersArray.find((oneUser, i) => {
+				if (oneUser._id == req.params.id) {
+					if (oneUser.pet){
+						oneUser.pet.push(petData);
+					} else {
+						oneUser.pet = [petData]
+					}
+					res.json(oneUser)
+				}else {
+					next(error(404, "User not found"))
+				}
+			});
+		} else {
+			next(error(404, "Pet not found"))
+		}
+	})
 	
 
 module.exports = router;
 
 
-// "firstName": "Catalina",
-// "lastName": "Quarleri",
-// "phone": "3036412156",
-// "email": "cataquarleri@gmail.com",
-// "contactPreference": "Text Messages",
-// "service": "Overnight Care",
-// "nextDates": {
-// "startingDate": "2024-04-09",
-// "endDate": "2024-05-01"
-// },
-// "address": {
-// "id": 0,
-// "typeOfAddress": "Parents House",
-// "street": "43 Sherman St #301",
-// "city": "Denver",
-// "state": "CO",
-// "zip": "80203",
-// "country": "United States"
-// },
+// { "firstName": "Mr.",
+// "lastName": "Plow",
+// "phone": "5554796",
+// "email": "mrplow@gmail.com",
+// "contactPreferences": "Phone Call"
+// }
+
 // "pets": {
 // "id": 2,
 // "type": "Dog",

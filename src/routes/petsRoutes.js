@@ -2,14 +2,16 @@ const express = require('express');
 const router = express.Router();
 const store = require('store2');
 const petsArray = require('../../data/pets');
-const {createNewPet} = require('../utilities/createNewPet.js')
 
 let pageName = 'Pets';
 
-router.route('/').get((req, res, next) => {
-	let hasNeedsInfo = true;
+//Api routes /pets
+router
+.route('/')
+.get((req, res, next) => {
+
 	console.log('IM IN GET of pets');
-	res.render('pages/createPet.ejs', { pageName: pageName, hasNeedsInfo: hasNeedsInfo });
+	res.render('pages/createPet.ejs', { pageName: pageName});
 });
 
 router.route('/api')
@@ -35,7 +37,6 @@ router.route('/api')
 		store.set('minPetInfo', minInfo);
 		store.set('petInfo', petInfo);
         console.log("pet info in routes",store.get('petInfo'))
-        createNewPet()
         res.json({id: petInfo.id, status: 201}).status(201)
 		res.redirect('/success');
 	} else {

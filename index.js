@@ -11,8 +11,7 @@ const multer = require('multer');
 
 //Utilities and middlewares
 const error = require('./src/middlewares/errorHandling.js');
-const {createNewUser} = require('./src/utilities/createNewUser.js')
-const {createNewPet} = require('./src/utilities/createNewPet.js')
+
 
 //App settings
 app.set('view engine', 'ejs');
@@ -24,14 +23,15 @@ app.use(express.static(path.join(__dirname, '/public')));
 const usersRoutes = require('./src/routes/usersRoutes.js');
 const petsRoutes = require('./src/routes/petsRoutes.js');
 const addressRoutes = require('./src/routes/addressRoutes.js')
-app.use('/users', usersRoutes);
+app.use('/users/api', usersRoutes);
 app.use('/pets', petsRoutes);
-app.use('/api/address', addressRoutes)
+app.use('/address/api', addressRoutes)
 
 //Main app
 app.get('/', (req, res) => {
-	createNewUser()
-  // createNewPet()
+  // let regex = /[0-9]+.*\+.*-.*\(/i;
+  // console.log(regex.test('+54-(800)-555-9985'))
+  // console.log(regex)
 	res.render('pages/home.ejs');
 });
 
