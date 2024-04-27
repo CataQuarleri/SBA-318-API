@@ -11,6 +11,8 @@ const multer = require('multer');
 
 //Utilities and middlewares
 const error = require('./src/middlewares/errorHandling.js');
+const upload = multer({ dest: path.join(__dirname, '/public/images/') })
+app.use(upload.single('picture'))
 
 
 //App settings
@@ -36,7 +38,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/success', (req, res) => {
-	res.send("You submitted the info correctly. We'll contact you shortly")
+  let petInfo = store.get('petInfo');
+	res.send(`<h3>You submitted your pet's info correctly! Your pet's id is: ${petInfo?.id ? petInfo.id : 1}</h3>
+  <p>To attach your pet to your user, submit a PUT request to http://localhost:5050/users/api/*YOUR USER ID*/pets/*YOUR PET'S ID*</p>
+  <p>To find your user ID go to http://localhost:5050/users/api?lastName=*YOUR LAST NAME HERE*&firstName=*YOUR FIRST NAME HERE*</p>`)
 })
 
 //Middlewares

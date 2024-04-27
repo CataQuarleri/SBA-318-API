@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const store = require('store2');
 const petsArray = require('../../data/pets');
+const usersArray = require('../../data/users');
+
 
 let pageName = 'Pets';
 
@@ -9,7 +11,6 @@ let pageName = 'Pets';
 router
 .route('/')
 .get((req, res, next) => {
-
 	console.log('IM IN GET of pets');
 	res.render('pages/createPet.ejs', { pageName: pageName});
 });
@@ -20,6 +21,7 @@ router.route('/api')
 })
 .post((req, res) => { //for API testing  see body example below
     console.log("IM IN PET POST")
+	let userId = req.body.userId || ""
 	let name = req.body.name;
 	let typeOfPet = req.body.typeOfPet;
 	let breed = req.body.breed || "I don't know";
@@ -36,7 +38,22 @@ router.route('/api')
 		let petInfo = { id: id,  name: name, type: typeOfPet, breed: breed, sex: sex, age: age, size: size, food: food, walks: walks, medication: medication};
 		store.set('minPetInfo', minInfo);
 		store.set('petInfo', petInfo);
-        console.log("pet info in routes",store.get('petInfo'))
+		if (typeof userId == 'number'){
+			let user = usersArray.find(oneUser => {
+				if (oneUser._id == userId) {
+					if (oneUser.pet){
+						oneUser.pet.push(minInfo);
+					} else {
+						oneUser.pet = [minInfo]
+					}
+					petInfo.parents = {id: oneUser._id, name: `${oneUser.firstName} ${oneUser.lastName}`, phone: oneUser.phone}
+					store.set('petAdded', true)
+					console.log("Pet added to user succesfully")
+			}else {
+				console.log(error(404, "User not found"))
+			}
+		})
+		}
         res.json({id: petInfo.id, status: 201}).status(201)
 		res.redirect('/success');
 	} else {
@@ -48,7 +65,7 @@ module.exports = router;
 
 //POST EXAMPLE /api:
 // {
-//     "_id": 1,
+//	   "userId": 1
 //     "name": "Osito",
 //     "typeOfPet": "Dog",
 //     "breed": "Poodle/Maltese",
@@ -58,6 +75,5 @@ module.exports = router;
 //     "needsFood": false,
 //     "needsWalks": true,
 //     "needsMedication": false,
-//     "parents": { "id": 1, "name": "Marge Simpson", "phone": "1234567890" },
 //     "picture": ""
 //   }
