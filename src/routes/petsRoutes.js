@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const store = require('store2');
+const path = require('path');
 const petsArray = require('../../data/pets');
 const usersArray = require('../../data/users');
 
@@ -15,12 +16,19 @@ router
 	res.render('pages/createPet.ejs', { pageName: pageName});
 });
 
+router
+	.route('/:id')
+	.get((req, res, next) => {
+		
+	})
+
 router.route('/api')
 .get((req, res, next) => {
     res.send(petsArray)
 })
 .post((req, res) => { //for API testing  see body example below
     console.log("IM IN PET POST")
+
 	let userId = req.body.userId || ""
 	let name = req.body.name;
 	let typeOfPet = req.body.typeOfPet;
@@ -31,13 +39,17 @@ router.route('/api')
 	let food = req.body.needsFood ? true : false;
 	let walks = req.body.needsWalks ? true : false;
 	let medication = req.body.needsMedication ? true : false;
-    console.log("each info", name, typeOfPet, breed, sex, age, food, walks, medication)
+	let picture = req.file?.path ? req.file.path : path.resolve(__dirname, '../../public/images/default.jpeg')
+
 	if (name && typeOfPet && breed && sex && age && size) {
+
 		let id = (petsArray.length == 0 ? petsArray.length + 1 : petsArray.length - 1) + 1;
 		let minInfo = { id: id, type: typeOfPet, name: name};
-		let petInfo = { id: id,  name: name, type: typeOfPet, breed: breed, sex: sex, age: age, size: size, food: food, walks: walks, medication: medication};
+		let petInfo = { id: id,  name: name, type: typeOfPet, breed: breed, sex: sex, age: age, size: size, food: food, walks: walks, medication: medication, picture: picture};
+		
 		store.set('minPetInfo', minInfo);
 		store.set('petInfo', petInfo);
+		
 		if (typeof userId == 'number'){
 			let user = usersArray.find(oneUser => {
 				if (oneUser._id == userId) {
@@ -54,8 +66,8 @@ router.route('/api')
 			}
 		})
 		}
-        res.json({id: petInfo.id, status: 201}).status(201)
 		res.redirect('/success');
+        // res.json({id: petInfo.id, status: 201}).status(201)
 	} else {
 		res.json({ error: 'Not enough information' });
 	}
@@ -72,8 +84,7 @@ module.exports = router;
 //     "sex": "M",
 //     "age": "7",
 //     "size": "small boy",
-//     "needsFood": false,
+//     "needsFood": true,
 //     "needsWalks": true,
-//     "needsMedication": false,
-//     "picture": ""
+//     "needsMedication": false
 //   }
