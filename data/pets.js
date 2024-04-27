@@ -1,4 +1,69 @@
 let pets = [ 
+    {
+        "id": 1,
+        "name": "Snowball I",
+        "type": "Cat",
+        "breed": "white",
+        "sex": "F",
+        "age": "1",
+        "size": "fluffy",
+        "food": false,
+        "walks": false,
+        "medication": false,
+        "picture": "/Users/cata/Documents/PerScholas/SBA318/CRM-API/public/images/1714232782105.png"
+      },
+      {
+        "id": 2,
+        "name": "Snowball II",
+        "type": "Cat",
+        "breed": "grey",
+        "sex": "M",
+        "age": "2",
+        "size": "skinny cat",
+        "food": false,
+        "walks": false,
+        "medication": false,
+        "picture": "/Users/cata/Documents/PerScholas/SBA318/CRM-API/public/images/1714232812969.png"
+      },
+      {
+        "id": 3,
+        "name": "Snowball II",
+        "type": "Cat",
+        "breed": "brown",
+        "sex": "F",
+        "age": "1",
+        "size": "fluffy",
+        "food": true,
+        "walks": false,
+        "medication": false,
+        "picture": "/Users/cata/Documents/PerScholas/SBA318/CRM-API/public/images/1714232862576.jpeg"
+      },
+      {
+        "id": 4,
+        "name": "Snowball IV (Coltrane)",
+        "type": "Cat",
+        "breed": "white",
+        "sex": "M",
+        "age": "2",
+        "size": "big head",
+        "food": true,
+        "walks": false,
+        "medication": false,
+        "picture": "/Users/cata/Documents/PerScholas/SBA318/CRM-API/public/images/1714232896048.jpeg"
+      },
+      {
+        "id": 5,
+        "name": "Snowball V",
+        "type": "Cat",
+        "breed": "grey",
+        "sex": "F",
+        "age": "38",
+        "size": "skinny cat",
+        "food": true,
+        "walks": true,
+        "medication": false,
+        "picture": "/Users/cata/Documents/PerScholas/SBA318/CRM-API/public/images/1714232927272.jpeg"
+      }
 ];
 
 module.exports = pets

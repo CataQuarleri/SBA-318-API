@@ -1,0 +1,27 @@
+<div class="card">
+	<img
+		src=<%=imagePath %>
+		alt="Pet Image"
+		class="pet-image"
+	/>
+	<div class="pet-info">
+		<h2 class="pet-name"><%=petSelected.name %></h2>
+		<p class="pet-details">Type: <span class="pet-type"><%=petSelected.type %></span></p>
+		<p class="pet-details">Breed: <span class="pet-breed"><%=petSelected.breed %></span></p>
+		<p class="pet-details">Size: <span class="pet-size"><%=petSelected.size %></span></p>
+		<p class="pet-details">Age: <span class="pet-age"><%=petSelected.age %></span></p>
+		<div class="pet-details">Needs: 
+            <ul>
+            <% if (petSelected.walks == true) {  %>
+            <li class="pet-needs">To go on walks</li>
+            <% } %>
+            <% if (petSelected.food == true) {  %>
+                <li class="pet-needs">To be fed</li>
+                <% } %>
+            <% if (petSelected.medication == true) {  %>
+                <li class="pet-needs">To be medicated</li>
+                <% } %>
+        </ul>
+    </div>
+	</div>
+</div>

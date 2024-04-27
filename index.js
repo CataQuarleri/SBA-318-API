@@ -51,7 +51,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
 	res.status(err.status || 500);
-	res.json({ error: err.message });
+	// res.json({ error: err.message });
 });
 
 //Run server

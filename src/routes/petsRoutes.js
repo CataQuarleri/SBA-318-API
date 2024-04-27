@@ -9,26 +9,30 @@ const usersArray = require('../../data/users');
 let pageName = 'Pets';
 
 //Api routes /pets
+router.get('/', (req, res, next) => {
+	if(req.query["petId"]){
+		console.log("got here")
+		let petSelected = petsArray.find(p => {
+			if(p.id == req.query["petId"]){
+				return p
+			}
+		})
+		const publicIndex = petSelected.picture.indexOf('public');
+		const imagePath = petSelected.picture.substring(publicIndex + 'public'.length);
+		console.log("IMAGE", imagePath)
+		res.render('pages/viewPets.ejs', {petsArray, pageName: "View Pets", petSelected: petSelected, imagePath: imagePath})
+	}
+	res.render('pages/viewPets.ejs', {petsArray, pageName: "View Pets", petSelected: false})
+})
+
 router
-.route('/')
+.route('/form')
 .get((req, res, next) => {
 	console.log('IM IN GET of pets');
 	res.render('pages/createPet.ejs', { pageName: pageName});
-});
-
-router
-	.route('/:id')
-	.get((req, res, next) => {
-		
-	})
-
-router.route('/api')
-.get((req, res, next) => {
-    res.send(petsArray)
 })
-.post((req, res) => { //for API testing  see body example below
+.post((req, res) => { //for API testing  see body example at the end - beware, res.redirect might not work on API testing. For API testing uncomment res.json and comment res.redirect
     console.log("IM IN PET POST")
-
 	let userId = req.body.userId || ""
 	let name = req.body.name;
 	let typeOfPet = req.body.typeOfPet;
@@ -66,18 +70,32 @@ router.route('/api')
 			}
 		})
 		}
+		petsArray.push(petInfo)
 		res.redirect('/success');
         // res.json({id: petInfo.id, status: 201}).status(201)
 	} else {
 		res.json({ error: 'Not enough information' });
 	}
-});
+})
+
+router
+	.route('/:id')
+	.get((req, res, next) => {
+
+	})
+router.get('/api/getpets', (req, res, next) => {
+	console.log("IM IN GET")
+	res.json(petsArray)
+})
+router
+	.route('/api')
+	;
 
 module.exports = router;
 
 //POST EXAMPLE /api:
 // {
-//	   "userId": 1
+// 	   "userId": 1
 //     "name": "Osito",
 //     "typeOfPet": "Dog",
 //     "breed": "Poodle/Maltese",
