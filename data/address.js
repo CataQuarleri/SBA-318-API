@@ -1,7 +1,16 @@
-let addresses = [
+let address = [
+    {
+        id: 1,
+        type: 'Parents House',
+        street: '742 Evergreen Terrace',
+        city: 'Springfield',
+        state: 'New Sodom',
+        zip: '192005',
+        countre: 'USA'
+    }
 ];
 
-module.exports = addresses = [];
+module.exports = address;
 // {
     
 //     id: 1,

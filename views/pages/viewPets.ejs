@@ -12,12 +12,12 @@
     <div class="container">
         <% if (petSelected){%>
             <%- include('../partials/petCard') %>
+            <div class="attach-pet">
+            <h3>Is this your pet?</h3>
+            <p>To attach your pet to your user, submit a PUT REQUEST to http://localhost:5050/users/api/*YOUR USER ID*/pets/*YOUR PET'S ID*</p>
+    <p>To find your user ID go to http://localhost:5050/users/api?lastName=*YOUR LAST NAME HERE*&firstName=*YOUR FIRST NAME HERE*</p>
+    </div>      
             <% } %>
         </div>
-        <div class="attach-pet">
-        <h3>Is this your pet?</h3>
-        <p>To attach your pet to your user, submit a PUT REQUEST to http://localhost:5050/users/api/*YOUR USER ID*/pets/*YOUR PET'S ID*</p>
-<p>To find your user ID go to http://localhost:5050/users/api?lastName=*YOUR LAST NAME HERE*&firstName=*YOUR FIRST NAME HERE*</p>
-</div>      
 </body>
 </html>

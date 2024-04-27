@@ -1,4 +1,12 @@
 let users = [
+    { 
+    _id: 1,
+        firstName: "Mr.",
+lastName: "Plow",
+phone: "5554796",
+email: "mrplow@gmail.com",
+contactPreferences: "Phone Call"
+}
 ];
 
 module.exports = users

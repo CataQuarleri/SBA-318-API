@@ -23,5 +23,11 @@
                 <% } %>
         </ul>
     </div>
+    <% if (petSelected.parents) {  %>
+        <p>Parents:</p>
+        <ul>
+        <li class="pet-needs"><%=petSelected.parents.name%></li>
+    </ul>
+        <% } %>
 	</div>
 </div>

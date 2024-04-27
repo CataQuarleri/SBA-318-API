@@ -10,7 +10,7 @@ let pets = [
         "food": false,
         "walks": false,
         "medication": false,
-        "picture": "/Users/cata/Documents/PerScholas/SBA318/CRM-API/public/images/1714232782105.png"
+        "picture": "/images/1714232782105.png"
       },
       {
         "id": 2,
@@ -23,7 +23,7 @@ let pets = [
         "food": false,
         "walks": false,
         "medication": false,
-        "picture": "/Users/cata/Documents/PerScholas/SBA318/CRM-API/public/images/1714232812969.png"
+        "picture": "/images/1714232812969.png"
       },
       {
         "id": 3,
@@ -36,7 +36,7 @@ let pets = [
         "food": true,
         "walks": false,
         "medication": false,
-        "picture": "/Users/cata/Documents/PerScholas/SBA318/CRM-API/public/images/1714232862576.jpeg"
+        "picture": "/images/1714232862576.jpeg"
       },
       {
         "id": 4,
@@ -49,7 +49,7 @@ let pets = [
         "food": true,
         "walks": false,
         "medication": false,
-        "picture": "/Users/cata/Documents/PerScholas/SBA318/CRM-API/public/images/1714232896048.jpeg"
+        "picture": "/images/1714232896048.jpeg"
       },
       {
         "id": 5,
@@ -62,7 +62,7 @@ let pets = [
         "food": true,
         "walks": true,
         "medication": false,
-        "picture": "/Users/cata/Documents/PerScholas/SBA318/CRM-API/public/images/1714232927272.jpeg"
+        "picture": "/images/1714232927272.jpeg"
       }
 ];
 

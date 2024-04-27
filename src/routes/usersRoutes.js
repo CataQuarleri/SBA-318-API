@@ -16,6 +16,15 @@ router
 	.route('/')
 	.get((req, res, next) => {
 		//if userID in req.query
+		if (req.query['lastName'] && req.query['firstName']){
+			usersArray.find(oneUser => {
+				if (req.query['lastName'].toLowerCase() == oneUser.lastName.toLowerCase()){
+					if (req.query['firstName'].toLowerCase() == oneUser.firstName.toLowerCase()){
+						res.json(oneUser)
+					}
+				}
+			})
+		}
 		res.json(usersArray);
 	})
 	.post((req, res, next) => {
@@ -32,7 +41,7 @@ router
 		// }
 		let contactPreferences = req.body.contactPreferences;
 		console.log("ALL DATA", firstName, lastName, phone, email, contactPreferences)
-		let _id = (usersArray.length == 0 | usersArray.length == 1 ? usersArray.length : usersArray.length - 1) + 1;
+		let _id = usersArray.length  + 1;
 		let data;
 		if (firstName && lastName && phone && email && contactPreferences) {
 			 data = {
@@ -57,7 +66,7 @@ router
 
 	router
 		.route('/:id')
-		.get((req, res) => {
+		.get((req, res, next) => {
 			const user = usersArray.find((oneUser, i) => {
 				if (oneUser._id == req.params.id) {
 					return oneUser
@@ -122,6 +131,7 @@ router
 		
 	})
 	.put( (req, res, next) => {
+		console.log('im in')
 		let petData;
 		const pet = petsArray.find((onepet) => {
 			if (onepet.id == req.params.petId) {
@@ -156,6 +166,12 @@ module.exports = router;
 // "phone": "5554796",
 // "email": "mrplow@gmail.com",
 // "contactPreferences": "Phone Call"
+// }
+// { "firstName": "Lisa",
+// "lastName": "Simpson",
+// "phone": "333-4567",
+// "email": "eatgreens@gmail.com",
+// "contactPreferences": "Text Message"
 // }
 
 // "pets": {
