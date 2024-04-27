@@ -37,6 +37,7 @@ app.use('/address/api', addressRoutes); // /address/api (GET & POST) - /address/
 
 //Main app
 app.get('/', (req, res) => {
+
 	res.render('pages/home.ejs', {pageName: 'home'});
 });
 

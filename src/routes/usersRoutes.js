@@ -8,7 +8,7 @@ const usersArray = require('../../data/users');
 const petsArray = require('../../data/pets');
 
 //Regex
-let phonePattern = /^[0-9]+$/; //I need the phone as a string 
+let phonePattern = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/ //I need the phone as a string 
 let emailPattern = /^[^@]+@[^@]+.[^@]+$/;
 
 //Api routes /users/api
@@ -32,9 +32,9 @@ router
 		let firstName = req.body.firstName;
 		let lastName = req.body.lastName;
 		let phone = req.body.phone;
-		// if (phone.match(phonePattern)) {
-		// 	next(error(400, "Bad request, phone has to be only numbers"))
-		// }
+		if (!phonePattern.test(phone)) {
+			next(error(400, "Bad request, phone has to be only numbers and contain at least 10 numbers"))
+		}
 		let email = req.body.email;
 		// if (email.match(emailPattern)){
 		// 	next(error(400, "Bad request, email has to be a valid format"))
@@ -169,7 +169,7 @@ module.exports = router;
 // }
 // { "firstName": "Lisa",
 // "lastName": "Simpson",
-// "phone": "333-4567",
+// "phone": "123-333-4567",
 // "email": "eatgreens@gmail.com",
 // "contactPreferences": "Text Message"
 // }

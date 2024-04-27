@@ -1,13 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <%- include('../partials/head') %>
-</head>
-<body>
-    <%- include('../partials/navbar') %>
-    <div class="container">
-        <h1>HELLO WORLD!!!</h1>
-
-    </div>
-</body>
+	<head>
+		<%- include('../partials/head') %>
+	</head>
+	<body>
+		<%- include('../partials/navbar') %>
+		<div class="container">
+			<h1>Welcome to my API views!</h1>
+            <p>by <span><a href="https://github.com/CataQuarleri">Cata Quarleri</a></span></p>
+			The only paths containing rendered views are:
+			<ul>
+				<li><a href="/">Home ('/')</a></li>
+				<li><a href="/pets/form">Create a pet form ('/pets/form')</a></li>
+				<li><a href="/pets/seePets">View pets in database ('/pets/seePets')</a></li>
+			</ul>
+            <p>The additional view '/success' is not rendered but sent.</p>
+			<p>
+				You can only access the "View pets" path if you have already created a pet in the database (Don't try to cheat, the middleware knows it all!)
+			</p>
+			<p>Each time the server reloads, your created pet will be deleted and you'll have to create it again.</p>
+			<p>
+				To create users and addresses you will have to submit the POST request through an API tester. You'll find body
+				examples at the end of each route's file<br>
+                You can attach (PUT) users to addresses, addresses to users, pets to users and users to pets.
+			</p>
+			
+			<h4>Here's a list of endpoints:</h4>
+			<ul>
+				<li>/users/api</li>
+				<li>/users/api?lastName=&firstName=</li>
+				<li>/users/api/:id</li>
+				<li>/users/api/:id/addPet/:id</li>
+				<li>/pets/form</li>
+				<li>/pets/seePets</li>
+				<li>/pets/seePets?petId=</li>
+				<li>/pets/api/:id</li>
+				<li>/address/api</li>
+				<li>/address/api/:id</li>
+			</ul>
+			<p>
+				The node packages used are: <a href="https://www.npmjs.com/package/multer">Multer</a> to handle the pet images
+				sent via the /pets/form endpoint, and <a href="https://www.npmjs.com/package/store2">Store2</a> for middleware
+				handling and future updates
+			</p>
+		</div>
+	</body>
 </html>
